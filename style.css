@@ -1,0 +1,19 @@
+
+
+input{
+	position: relative;
+	background-color: #1caf9a;
+	color: #fff;
+	width: 100px;
+	height: 30px;
+	font-size: 14px;
+	border-radius: 3px;
+	border: 0px;
+}
+
+input[type="text"]{
+	position: relative;
+	border: 0px;
+	background-color: #fff;
+	visibility: hidden;
+}
