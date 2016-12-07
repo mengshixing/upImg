@@ -14,6 +14,7 @@
 <input type="file" name="path" id="path" style="display:none" accept="image/gif, image/jpeg,image/png"
  onchange="upfile.value=this.value;
 	previewImage(this);
+	canvasimg();
   $('#preview').css('display','block');
   $('#removeimg').css('display','none');
   $('#setbanner').val(0);
@@ -27,7 +28,9 @@
 <div id="preview">
     <img id="imghead" src=''>
 </div>
-
+<canvas id="myCanvas" style="border:1px solid #d3d3d3;background:#ffffff;">
+	Your browser does not support the HTML5 canvas tag.
+</canvas>
 </body>
 </html>
 <script type="text/javascript">
@@ -93,5 +96,11 @@
             param.top = Math.round((maxHeight - param.height) / 2);
             return param;
         }
+		function canvasimg(){
+			var c=document.getElementById("myCanvas");
+			var ctx=c.getContext("2d");
+			var img=document.getElementById("imghead");
+			ctx.drawImage(img,10,10);
+		}
 
 </script>     
