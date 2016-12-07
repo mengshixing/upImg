@@ -9,6 +9,8 @@ input{
 	font-size: 14px;
 	border-radius: 3px;
 	border: 0px;
+	top: -15px;
+    left: 150px;	
 }
 
 input[type="text"]{
@@ -16,4 +18,26 @@ input[type="text"]{
 	border: 0px;
 	background-color: #fff;
 	visibility: hidden;
+}
+.box {
+    border: 1px solid #ccc;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    cursor: move;
+}
+.themes-p{
+	position: relative;
+	top: 10px;
+	left: 20px;
+	width:280px;
+}
+img{
+	border: 1px solid #ccc;
+}
+#myCanvas{
+	border: 1px solid #ccc;
+	top: 30px;
+	position: absolute;
+	left: 800px;
 }
