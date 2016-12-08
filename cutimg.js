@@ -64,7 +64,7 @@ document.onmousedown = function(e) {
 		diffY = startY - e.target.offsetTop;
 	}
 	else {
-		
+		//如果页面已经画出了box,则不能画出第二个box框
 		if(existbox===true){
 			return false;
 		}			
@@ -77,6 +77,7 @@ document.onmousedown = function(e) {
 		document.body.appendChild(active_box);
 		active_box = null;
 	}
+	//防止浏览器拖动图片乱动
 	e.preventDefault();
 };
 	   
@@ -84,6 +85,9 @@ document.onmousedown = function(e) {
 document.onmousemove = function(e) {
 	// 更新 box 尺寸
 	if(document.getElementById("active_box") !== null) {
+		
+		
+		
 		var ab = document.getElementById("active_box");
 		ab.style.width = e.pageX - startX + 'px';
 		ab.style.height = e.pageY - startY + 'px';
