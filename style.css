@@ -20,7 +20,7 @@ input[type="text"]{
 	visibility: hidden;
 }
 .box {
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     width: 0px;
     height: 0px;
     position: absolute;
@@ -40,4 +40,5 @@ img{
 	top: 30px;
 	position: absolute;
 	left: 800px;
+	display:none;
 }
