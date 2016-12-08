@@ -3,8 +3,8 @@
 //图片上传预览
 function previewImage(file)
 {
-  var MAXWIDTH  = 260; 
-  var MAXHEIGHT = 180;
+  //var MAXWIDTH  = 260; 
+  //var MAXHEIGHT = 180;
 
   if (file.files && file.files[0])
   {	  
@@ -62,9 +62,11 @@ document.onmousedown = function(e) {
 		// 计算坐标差值
 		diffX = startX - e.target.offsetLeft;
 		diffY = startY - e.target.offsetTop;
+		console.log( startX ,e.target.offsetLeft);
+		console.log(diffX,diffY);
 	}
 	else {
-		//如果页面已经画出了box,则不能画出第二个box框
+		//如果页面已经画出了box,则不能画出第二个box
 		if(existbox===true){
 			return false;
 		}			
@@ -86,7 +88,11 @@ document.onmousemove = function(e) {
 	// 更新 box 尺寸
 	if(document.getElementById("active_box") !== null) {
 		
-		
+		//右下角不能超过图片边界,否则默认鼠标抬起
+		if(isimg(e.pageX,e.pageY)!==true){		
+			document.onmouseup(e);
+			return false;
+		}	
 		
 		var ab = document.getElementById("active_box");
 		ab.style.width = e.pageX - startX + 'px';
@@ -97,7 +103,27 @@ document.onmousemove = function(e) {
 	   
 	// 移动，更新 box 坐标
 	if(document.getElementById("moving_box") !== null && dragging) {
+		
 		var mb = document.getElementById("moving_box");
+		
+		//左上角超出图片界限
+		if(isimg(e.target.offsetLeft,e.target.offsetTop)!==true){		
+			//document.onmouseup(e);
+			mb.style.top = e.pageY - diffY + 'px';
+			mb.style.left = e.pageX - diffX + 'px';
+			
+			return false;
+		}
+
+
+		
+		
+		//右下角超出图片界限
+		if(isimg(e.target.offsetLeft+parseInt(mb.style.width),e.target.offsetTop+parseInt(mb.style.height))!==true){		
+			//document.onmouseup(e);
+			return false;
+		}	
+		
 		mb.style.top = e.pageY - diffY + 'px';
 		mb.style.left = e.pageX - diffX + 'px';
 		
