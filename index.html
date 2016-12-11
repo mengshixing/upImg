@@ -19,11 +19,9 @@
 <input type="text" size="20" name="upfile" id="upfile" disabled="true">  
 <input type="button" value="选择图片" onclick="path.click()" >  
 <input type="file" name="path" id="path" style="display:none" accept="image/gif, image/jpeg,image/png"
- onchange="upfile.value=this.value;
-	previewImage(this);
-  ">
+ onchange="upfile.value=this.value; previewImage(this);">
 
-<input id="setdefault" type="button" value="取消" >  
+<input id="setdefault" type="button" value="取消" onclick="cancer();">  
 <input id="setbanner" type="text" name="setbanner" value="0" style="display:none;"> 
 
 

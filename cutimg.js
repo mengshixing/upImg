@@ -74,6 +74,7 @@ document.onmousedown = function(e) {
 		var active_box = document.createElement("div");
 		active_box.id = "active_box";
 		active_box.className = "box";
+		active_box.setAttribute("name","box");
 		active_box.style.top = startY + 'px';
 		active_box.style.left = startX + 'px';
 		document.body.appendChild(active_box);
@@ -105,28 +106,59 @@ document.onmousemove = function(e) {
 	if(document.getElementById("moving_box") !== null && dragging) {
 		
 		var mb = document.getElementById("moving_box");
+		var img = document.getElementById('imghead');
 		
 		//左上角超出图片界限
 		if(isimg(e.target.offsetLeft,e.target.offsetTop)!==true){		
 			//document.onmouseup(e);
-			mb.style.top = e.pageY - diffY + 'px';
-			mb.style.left = e.pageX - diffX + 'px';
 			
-			return false;
+			console.log(e.target.offsetLeft,mb.style.left,img.offsetLeft);
+			console.log(img.offsetLeft+1 + 'px');
+			//超出左方,限定在图片之内,
+			if(e.target.offsetLeft<=img.offsetLeft)
+			{				
+				mb.style.left = img.offsetLeft+1 + 'px';				
+			}
+				
+			//超出上方
+			if(e.target.offsetTop<=img.offsetTop)
+			{				
+				mb.style.top = img.offsetTop+1 + 'px';
+			}
+			//mb.style.top = e.pageY - diffY + 'px';
+			//mb.style.left = e.pageX - diffX + 'px';
+			document.onmouseup(e);
+			//return false;
 		}
 
 
 		
 		
 		//右下角超出图片界限
-		if(isimg(e.target.offsetLeft+parseInt(mb.style.width),e.target.offsetTop+parseInt(mb.style.height))!==true){		
+		else if(isimg(e.target.offsetLeft+parseInt(mb.style.width),e.target.offsetTop+parseInt(mb.style.height))!==true){		
 			//document.onmouseup(e);
-			return false;
+			
+			//超出右方,限定在图片之内,
+			if((e.target.offsetLeft+parseInt(mb.style.width))>=(img.offsetLeft+img.offsetWidth))
+			{				
+				mb.style.left = img.offsetLeft+img.offsetWidth-parseInt(mb.style.width)-1 + 'px';				
+			}
+				
+			//超出下方
+			if((e.target.offsetTop+parseInt(mb.style.height))>=(img.offsetTop+img.offsetHeight))
+			{				
+				mb.style.top = img.offsetTop+img.offsetHeight-parseInt(mb.style.height)-1 + 'px';
+			}
+			//mb.style.top = e.pageY - diffY + 'px';
+			//mb.style.left = e.pageX - diffX + 'px';
+			//return false;
+			document.onmouseup(e);
 		}	
 		
-		mb.style.top = e.pageY - diffY + 'px';
-		mb.style.left = e.pageX - diffX + 'px';
-		
+		else{
+			mb.style.top = e.pageY - diffY + 'px';
+			mb.style.left = e.pageX - diffX + 'px';			
+		}
 		canvasimg(e);
 	}
 };
@@ -146,6 +178,17 @@ document.onmouseup = function(e) {
 		}
 	}
 };
+//点击取消方框
+function cancer(){
+	var b = document.getElementsByName("box")[0];
+	document.body.removeChild(b);
+	
+	//是否存在方框置为否
+	existbox=false;
+	var c=document.getElementById("myCanvas");
+	
+	c.style.display="none";
+}
 
 //判断鼠标是否在要裁剪的大图之内,否则不触发点击事件
 function isimg(x,y){
